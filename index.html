@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+html_content = """<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>러브X6 캠퍼스 라이프! - 캐릭터 소개</title>
-    <!-- 구글 폰트 불러오기 (둥글둥글하고 귀여운 고운돋움 & 선플라워 폰트) -->
+    <!-- 구글 폰트 불러오기 (고운돋움 & 선플라워) -->
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Sunflower:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -31,7 +31,6 @@
             color: #333;
         }
 
-        /* 배경 반짝이 효과 */
         .sparkles {
             position: absolute;
             width: 100%;
@@ -48,7 +47,6 @@
             opacity: 0.15;
         }
 
-        /* [1] 타이틀 (랜딩) 화면 */
         #landing-screen {
             position: absolute;
             width: 100%;
@@ -75,15 +73,6 @@
             filter: drop-shadow(0px 8px 15px rgba(217, 78, 115, 0.3));
         }
 
-        /* 로고 이미지가 없을 때를 대비한 텍스트 대체 스타일 */
-        .title-fallback {
-            font-family: 'Sunflower', sans-serif;
-            font-size: 3.5rem;
-            color: var(--dark-pink);
-            text-shadow: 3px 3px 0px #fff, -3px -3px 0px #fff, 3px -3px 0px #fff, -3px 3px 0px #fff, 0px 6px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-
         .play-btn {
             font-family: 'Sunflower', sans-serif;
             font-size: 1.8rem;
@@ -96,8 +85,6 @@
             cursor: pointer;
             box-shadow: 0 8px 20px rgba(217, 78, 115, 0.4);
             transition: all 0.2s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .play-btn:hover {
@@ -106,16 +93,11 @@
             background: linear-gradient(180deg, #ffb3c1 0%, var(--dark-pink) 100%);
         }
 
-        .play-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* [2] 메인 캐릭터 프로필 화면 */
         #profile-screen {
             position: absolute;
             width: 100%;
             height: 100%;
-            display: none; /* 처음엔 숨김 */
+            display: none;
             justify-content: center;
             align-items: center;
             z-index: 5;
@@ -140,7 +122,6 @@
             gap: 30px;
         }
 
-        /* 좌측 영역 (사진 + 대사창) */
         .left-panel {
             flex: 0 0 340px;
             display: flex;
@@ -149,7 +130,6 @@
             height: 100%;
         }
 
-        /* 2:3 비율 캐릭터 이미지 칸 */
         .photo-frame {
             width: 100%;
             aspect-ratio: 2 / 3;
@@ -171,7 +151,6 @@
             transition: opacity 0.3s ease;
         }
 
-        /* 이미지가 없을 때 보여줄 뼈대 이미지 */
         .photo-placeholder {
             position: absolute;
             text-align: center;
@@ -188,7 +167,6 @@
             height: 60px;
         }
 
-        /* 미연시 풍 대사창 */
         .dialogue-box {
             flex-grow: 1;
             background: var(--dialogue-bg);
@@ -202,7 +180,6 @@
             justify-content: center;
         }
 
-        /* 대사창 이름 태그 */
         .nametag {
             position: absolute;
             top: -15px;
@@ -224,7 +201,6 @@
             word-break: keep-all;
         }
 
-        /* 대사창 오른쪽 아래 깜빡이는 하트 화살표 */
         .dialogue-arrow {
             position: absolute;
             bottom: 10px;
@@ -234,7 +210,6 @@
             animation: blink 1s infinite;
         }
 
-        /* 우측 영역 (상세 정보창) */
         .right-panel {
             flex-grow: 1;
             display: flex;
@@ -268,7 +243,6 @@
             font-weight: bold;
         }
 
-        /* 정보 리스트 스타일 */
         .info-grid {
             display: flex;
             flex-direction: column;
@@ -303,7 +277,6 @@
             word-break: keep-all;
         }
 
-        /* 네비게이션 좌우 화살표 버튼 */
         .nav-arrow {
             position: absolute;
             top: 50%;
@@ -337,7 +310,6 @@
         .nav-left { left: -80px; }
         .nav-right { right: -80px; }
 
-        /* 하단 인디케이터 (동그라미 6개) */
         .indicator-container {
             position: absolute;
             bottom: -50px;
@@ -365,7 +337,6 @@
             box-shadow: 0 3px 8px rgba(217, 78, 115, 0.4);
         }
 
-        /* 애니메이션 효과들 */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
@@ -377,7 +348,6 @@
             50% { opacity: 1; transform: translateY(3px); }
         }
 
-        /* 반응형 화면 대응 (작은 모니터/태블릿용) */
         @media (max-width: 1200px) {
             .nav-left { left: 15px; }
             .nav-right { right: 15px; }
@@ -414,13 +384,12 @@
 
     <div class="sparkles"></div>
 
-    <!-- [1] 타이틀 화면 (들어오자마자 보이는 화면) -->
+    <!-- [1] 타이틀 화면 -->
     <div id="landing-screen">
         <div class="title-logo-container">
-            <!-- 사용자가 업로드한 로고 파일명을 그대로 매핑해 두었습니다. -->
-            <!-- 만약 다른 이름의 이미지를 쓸 경우 아래 src를 수정하시면 됩니다. -->
-            <img src="제목을 입력해주세요. (24).png" alt="러브X6 캠퍼스 라이프!" onerror="this.style.display='none'; document.getElementById('title-fallback').style.display='block';">
-            <div id="title-fallback" class="title-fallback" style="display:none;">러브 X 6<br>캠퍼스 라이프!</div>
+            <!-- ★★★ 여기에 보내주신 타이틀 이미지 파일명을 입력하세요! ★★★ -->
+            <!-- 주의: 이 HTML 파일이 있는 폴더 안에 "제목을 입력해주세요. (24).png" 파일이 함께 있어야 합니다. -->
+            <img src="./제목을 입력해주세요. (24).png" alt="타이틀 로고">
         </div>
         <button class="play-btn" onclick="startIntro()">PLAY</button>
     </div>
@@ -429,16 +398,12 @@
     <div id="profile-screen">
         <div class="main-container">
             
-            <!-- 왼쪽 네비게이션 화살표 -->
             <button class="nav-arrow nav-left" onclick="prevChar()">
                 <svg viewBox="0 0 24 24"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>
             </button>
 
-            <!-- 좌측 패널: 사진 + 한마디 대사창 -->
             <div class="left-panel">
                 <div class="photo-frame">
-                    <!-- 기본 캐릭터 이미지 공간 (2:3 비율) -->
-                    <!-- 이미지 경로를 캐릭터 폴더 구조에 맞게 세팅하시면 됩니다. (예: char1.png) -->
                     <img id="char-photo" src="" alt="캐릭터 사진" onerror="showPlaceholder()">
                     <div id="photo-placeholder" class="photo-placeholder">
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
@@ -452,7 +417,6 @@
                 </div>
             </div>
 
-            <!-- 우측 패널: 상세 정보 리스트 -->
             <div class="right-panel">
                 <div class="profile-header">
                     <span id="char-display-name" class="char-name">홍길동</span>
@@ -475,12 +439,10 @@
                 </div>
             </div>
 
-            <!-- 오른쪽 네비게이션 화살표 -->
             <button class="nav-arrow nav-right" onclick="nextChar()">
                 <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
             </button>
 
-            <!-- 하단 인디케이터 (동그라미 6개) -->
             <div class="indicator-container">
                 <div class="dot" onclick="jumpToChar(0)"></div>
                 <div class="dot" onclick="jumpToChar(1)"></div>
@@ -493,9 +455,8 @@
         </div>
     </div>
 
-    <!-- 미연시 캐릭터 데이터 처리용 스크립트 -->
     <script>
-        // 6명의 캐릭터 데이터 샘플 (원하시는 상세 정보로 직접 수정하시면 됩니다!)
+        // ★★★ 여기에 각 캐릭터의 사진 파일명(photo)을 넣어주세요! ★★★
         const characters = [
             {
                 name: "한도아",
@@ -504,58 +465,57 @@
                 personality: "츤데레 / 새침함",
                 features: "늘 툴툴거리며 차가워 보이지만, 네가 아플 땐 누구보다 먼저 약을 챙겨주는 소꿉친구. 카페 투어와 마카롱을 좋아한다.",
                 quote: "“흥, 딱히 너 보려고 기다린 건 아니거든? 마침 이쪽 지나가던 길이었을 뿐이야!”",
-                photo: "char1.png" // 이미지 파일명 매핑용
+                photo: "./char1.png" // 첫 번째 캐릭터 사진 파일명 입력
             },
             {
                 name: "서지한",
                 ageGrade: "3학년 / 22세",
                 dept: "컴퓨터공학과",
                 personality: "다정다감 / 모범생 / 든든함",
-                features: "과에서 유명한 다정한 선배. 누구에게나 친절하지만 유독 너에게만 더 부드러운 미소를 짓는다. 코딩하다 막히면 언제든 밤새 도와주는 든든한 조력자.",
+                features: "과에서 유명한 다정한 선배. 누구에게나 친절하지만 유독 너에게만 더 부드러운 미소를 짓는다.",
                 quote: "“언제든 모르는 게 생기거나 혼자 하기 힘들면 나 불러. 네 연락이라면 언제든 환영이니까.”",
-                photo: "char2.png"
+                photo: "./char2.png" // 두 번째 캐릭터 사진 파일명 입력
             },
             {
                 name: "민채원",
                 ageGrade: "1학년 / 20세",
                 dept: "실용음악과",
                 personality: "활발함 / 비타민 / 댕댕이형",
-                features: "캠퍼스의 인간 비타민 같은 새내기. 길가다 너만 보면 저 멀리서부터 소리를 지르며 뛰어온다. 기타 연주가 특기이며 너를 위한 자작곡을 만드는 게 비밀 목표.",
+                features: "캠퍼스의 인간 비타민 같은 새내기. 길가다 너만 보면 저 멀리서부터 소리를 지르며 뛰어온다.",
                 quote: "“선배!! 오늘 공강 맞죠? 헤헤, 나랑 저기 새로 생긴 크레페 집 같이 가요! 꼭이요!”",
-                photo: "char3.png"
+                photo: "./char3.png" // 세 번째 캐릭터 사진 파일명 입력
             },
             {
                 name: "윤하진",
                 ageGrade: "4학년 / 23세",
                 dept: "시각디자인학과",
                 personality: "쿨뷰티 / 신비로움 / 어른스러움",
-                features: "말수가 적고 고양이 같은 매력을 풍기는 졸작 준비생 선배. 평소엔 차분하지만 너 장난에는 쉽게 웃음을 터뜨린다. 스케치북에는 온통 너의 크로키로 가득하다.",
+                features: "말수가 적고 고양이 같은 매력을 풍기는 졸작 준비생 선배. 평소엔 차분하지만 너 장난에는 쉽게 웃음을 터뜨린다.",
                 quote: "“너... 되게 재미있는 아이네. 보고 있으면 영감이 떠올라. 조금 더 가까이 와볼래?”",
-                photo: "char4.png"
+                photo: "./char4.png" // 네 번째 캐릭터 사진 파일명 입력
             },
             {
                 name: "강우현",
                 ageGrade: "2학년 / 21세",
                 dept: "체육학과",
                 personality: "직진남 / 열정적 / 의리파",
-                features: "체대 축구부 에이스. 시원시원하고 뒤끝 없는 성격으로 인기가 많다. 다른 사람들 앞에서는 무뚝뚝한데 네 앞에만 서면 부끄러워하며 얼굴이 붉어지는 귀여운 면이 있다.",
+                features: "체대 축구부 에이스. 다른 사람들 앞에서는 무뚝뚝한데 네 앞에만 서면 부끄러워하며 얼굴이 붉어지는 귀여운 면이 있다.",
                 quote: "“이번 주말 축구부 결승전인데... 시간 되면 꼭 보러 와줘. 네가 와야 이길 수 있을 것 같아.”",
-                photo: "char5.png"
+                photo: "./char5.png" // 다섯 번째 캐릭터 사진 파일명 입력
             },
             {
                 name: "백은우",
                 ageGrade: "3학년 / 22세",
                 dept: "의예과",
                 personality: "차분함 / 뇌섹남 / 장난기 가득",
-                features: "늘 도서관 창가 자리에 앉아 두꺼운 전공책을 읽고 있는 수석 학생. 차가운 얼음 왕자 같지만 단둘이 있으면 은근히 능청맞게 장난을 걸어온다.",
+                features: "차가운 얼음 왕자 같지만 단둘이 있으면 은근히 능청맞게 장난을 걸어온다.",
                 quote: "“공부하는 데 방해되니까 저리 가... 장난이야. 도망가지 말고 내 옆에 앉아 있어.”",
-                photo: "char6.png"
+                photo: "./char6.png" // 여섯 번째 캐릭터 사진 파일명 입력
             }
         ];
 
         let currentIndex = 0;
 
-        // [PLAY] 버튼 누르면 실행되는 함수
         function startIntro() {
             const landing = document.getElementById('landing-screen');
             const profile = document.getElementById('profile-screen');
@@ -566,7 +526,6 @@
             setTimeout(() => {
                 landing.style.display = 'none';
                 profile.style.display = 'flex';
-                // 페이드인 효과 연출
                 setTimeout(() => {
                     profile.style.opacity = '1';
                 }, 50);
@@ -574,42 +533,34 @@
             }, 500);
         }
 
-        // 특정 인덱스의 캐릭터 정보 반영 함수
         function updateCharacter(index) {
             currentIndex = index;
             const data = characters[index];
 
-            // 데이터 반영
             document.getElementById('char-nametag').innerText = data.name;
             document.getElementById('char-display-name').innerText = data.name;
             document.getElementById('char-meta').innerText = data.ageGrade;
             document.getElementById('char-dept').innerText = data.dept;
             document.getElementById('char-personality').innerText = data.personality;
             document.getElementById('char-features').innerText = data.features;
-            
-            // 대사창 텍스트 타이핑 효과 적용 대신 깔끔하게 즉시 반영 후 애니메이션 효과 부여
             document.getElementById('char-dialogue').innerText = data.quote;
 
-            // 이미지 변경 처리
             const imgElement = document.getElementById('char-photo');
             const placeholder = document.getElementById('photo-placeholder');
             
             imgElement.style.opacity = '0';
             imgElement.src = data.photo;
             
-            // 이미지 로드 성공 시 플레이스홀더 숨기기
             imgElement.onload = function() {
                 placeholder.style.display = 'none';
                 imgElement.style.opacity = '1';
             };
             
-            // 이미지 로드 실패(혹은 없을) 시 플레이스홀더 켜기
             imgElement.onerror = function() {
                 placeholder.style.display = 'flex';
                 imgElement.style.opacity = '0';
             };
 
-            // 하단 도트 상태 업데이트
             const dots = document.querySelectorAll('.dot');
             dots.forEach((dot, i) => {
                 if (i === index) {
@@ -620,30 +571,26 @@
             });
         }
 
-        // 다음 캐릭터 보기
         function nextChar() {
             let nextIndex = currentIndex + 1;
             if (nextIndex >= characters.length) {
-                nextIndex = 0; // 처음으로 순환
+                nextIndex = 0;
             }
             updateCharacter(nextIndex);
         }
 
-        // 이전 캐릭터 보기
         function prevChar() {
             let prevIndex = currentIndex - 1;
             if (prevIndex < 0) {
-                prevIndex = characters.length - 1; // 마지막으로 순환
+                prevIndex = characters.length - 1;
             }
             updateCharacter(prevIndex);
         }
 
-        // 특정 도트 클릭 시 이동
         function jumpToChar(index) {
             updateCharacter(index);
         }
 
-        // onerror 방지용 보조 함수
         function showPlaceholder() {
             document.getElementById('photo-placeholder').style.display = 'flex';
             document.getElementById('char-photo').style.opacity = '0';
@@ -651,3 +598,9 @@
     </script>
 </body>
 </html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Updated HTML file successfully.")
