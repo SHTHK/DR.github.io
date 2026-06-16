@@ -1,4 +1,4 @@
-html_content = """<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
@@ -319,9 +319,10 @@ html_content = """<!DOCTYPE html>
             gap: 15px;
         }
 
+        /* 하단 6개 동그라미 버튼 */
         .dot {
-            width: 16px;
-            height: 16px;
+            width: 20px;
+            height: 20px;
             background-color: white;
             border: 3px solid var(--primary-pink);
             border-radius: 50%;
@@ -335,6 +336,11 @@ html_content = """<!DOCTYPE html>
             border-color: #fff;
             transform: scale(1.3);
             box-shadow: 0 3px 8px rgba(217, 78, 115, 0.4);
+        }
+
+        .dot:hover {
+            background-color: var(--light-pink);
+            transform: scale(1.2);
         }
 
         @keyframes float {
@@ -387,8 +393,6 @@ html_content = """<!DOCTYPE html>
     <!-- [1] 타이틀 화면 -->
     <div id="landing-screen">
         <div class="title-logo-container">
-            <!-- ★★★ 여기에 보내주신 타이틀 이미지 파일명을 입력하세요! ★★★ -->
-            <!-- 주의: 이 HTML 파일이 있는 폴더 안에 "제목을 입력해주세요. (24).png" 파일이 함께 있어야 합니다. -->
             <img src="./title.png" alt="타이틀 로고">
         </div>
         <button class="play-btn" onclick="startIntro()">PLAY</button>
@@ -443,20 +447,20 @@ html_content = """<!DOCTYPE html>
                 <svg viewBox="0 0 24 24"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>
             </button>
 
+            <!-- 하단 동그라미 6개 (클릭 시 해당 캐릭터로 이동) -->
             <div class="indicator-container">
-                <div class="dot" onclick="jumpToChar(0)"></div>
-                <div class="dot" onclick="jumpToChar(1)"></div>
-                <div class="dot" onclick="jumpToChar(2)"></div>
-                <div class="dot" onclick="jumpToChar(3)"></div>
-                <div class="dot" onclick="jumpToChar(4)"></div>
-                <div class="dot" onclick="jumpToChar(5)"></div>
+                <div class="dot" onclick="jumpToChar(0)" title="1번 캐릭터"></div>
+                <div class="dot" onclick="jumpToChar(1)" title="2번 캐릭터"></div>
+                <div class="dot" onclick="jumpToChar(2)" title="3번 캐릭터"></div>
+                <div class="dot" onclick="jumpToChar(3)" title="4번 캐릭터"></div>
+                <div class="dot" onclick="jumpToChar(4)" title="5번 캐릭터"></div>
+                <div class="dot" onclick="jumpToChar(5)" title="6번 캐릭터"></div>
             </div>
 
         </div>
     </div>
 
     <script>
-        // ★★★ 여기에 각 캐릭터의 사진 파일명(photo)을 넣어주세요! ★★★
         const characters = [
             {
                 name: "한도아",
@@ -465,7 +469,7 @@ html_content = """<!DOCTYPE html>
                 personality: "츤데레 / 새침함",
                 features: "늘 툴툴거리며 차가워 보이지만, 네가 아플 땐 누구보다 먼저 약을 챙겨주는 소꿉친구. 카페 투어와 마카롱을 좋아한다.",
                 quote: "“흥, 딱히 너 보려고 기다린 건 아니거든? 마침 이쪽 지나가던 길이었을 뿐이야!”",
-                photo: "./char1.png" // 첫 번째 캐릭터 사진 파일명 입력
+                photo: "./char1.png" 
             },
             {
                 name: "서지한",
@@ -474,7 +478,7 @@ html_content = """<!DOCTYPE html>
                 personality: "다정다감 / 모범생 / 든든함",
                 features: "과에서 유명한 다정한 선배. 누구에게나 친절하지만 유독 너에게만 더 부드러운 미소를 짓는다.",
                 quote: "“언제든 모르는 게 생기거나 혼자 하기 힘들면 나 불러. 네 연락이라면 언제든 환영이니까.”",
-                photo: "./char2.png" // 두 번째 캐릭터 사진 파일명 입력
+                photo: "./char2.png" 
             },
             {
                 name: "민채원",
@@ -483,7 +487,7 @@ html_content = """<!DOCTYPE html>
                 personality: "활발함 / 비타민 / 댕댕이형",
                 features: "캠퍼스의 인간 비타민 같은 새내기. 길가다 너만 보면 저 멀리서부터 소리를 지르며 뛰어온다.",
                 quote: "“선배!! 오늘 공강 맞죠? 헤헤, 나랑 저기 새로 생긴 크레페 집 같이 가요! 꼭이요!”",
-                photo: "./char3.png" // 세 번째 캐릭터 사진 파일명 입력
+                photo: "./char3.png" 
             },
             {
                 name: "윤하진",
@@ -492,7 +496,7 @@ html_content = """<!DOCTYPE html>
                 personality: "쿨뷰티 / 신비로움 / 어른스러움",
                 features: "말수가 적고 고양이 같은 매력을 풍기는 졸작 준비생 선배. 평소엔 차분하지만 너 장난에는 쉽게 웃음을 터뜨린다.",
                 quote: "“너... 되게 재미있는 아이네. 보고 있으면 영감이 떠올라. 조금 더 가까이 와볼래?”",
-                photo: "./char4.png" // 네 번째 캐릭터 사진 파일명 입력
+                photo: "./char4.png" 
             },
             {
                 name: "강우현",
@@ -501,7 +505,7 @@ html_content = """<!DOCTYPE html>
                 personality: "직진남 / 열정적 / 의리파",
                 features: "체대 축구부 에이스. 다른 사람들 앞에서는 무뚝뚝한데 네 앞에만 서면 부끄러워하며 얼굴이 붉어지는 귀여운 면이 있다.",
                 quote: "“이번 주말 축구부 결승전인데... 시간 되면 꼭 보러 와줘. 네가 와야 이길 수 있을 것 같아.”",
-                photo: "./char5.png" // 다섯 번째 캐릭터 사진 파일명 입력
+                photo: "./char5.png" 
             },
             {
                 name: "백은우",
@@ -510,7 +514,7 @@ html_content = """<!DOCTYPE html>
                 personality: "차분함 / 뇌섹남 / 장난기 가득",
                 features: "차가운 얼음 왕자 같지만 단둘이 있으면 은근히 능청맞게 장난을 걸어온다.",
                 quote: "“공부하는 데 방해되니까 저리 가... 장난이야. 도망가지 말고 내 옆에 앉아 있어.”",
-                photo: "./char6.png" // 여섯 번째 캐릭터 사진 파일명 입력
+                photo: "./char6.png" 
             }
         ];
 
@@ -587,6 +591,7 @@ html_content = """<!DOCTYPE html>
             updateCharacter(prevIndex);
         }
 
+        // 동그라미 버튼을 눌렀을 때 실행되는 함수
         function jumpToChar(index) {
             updateCharacter(index);
         }
@@ -598,9 +603,3 @@ html_content = """<!DOCTYPE html>
     </script>
 </body>
 </html>
-"""
-
-with open("index.html", "w", encoding="utf-8") as f:
-    f.write(html_content)
-
-print("Updated HTML file successfully.")
