@@ -128,7 +128,7 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            height: 100%;
+            height: 100%; /* PC에서는 100% */
         }
 
         .photo-frame {
@@ -251,7 +251,6 @@
             gap: 20px;
         }
 
-        /* ★ 정보 리스트 세로 정렬 */
         .info-item {
             display: flex;
             flex-direction: column;
@@ -314,7 +313,6 @@
         .nav-left { left: -80px; }
         .nav-right { right: -80px; }
 
-        /* ★ 하단 6개 동그라미 버튼 */
         .indicator-container {
             position: absolute;
             bottom: 25px;
@@ -381,25 +379,25 @@
                 box-shadow: none; 
                 padding: 20px 20px 80px 20px; 
                 overflow-y: auto; 
+                gap: 15px; /* ★ 메인 컨테이너 안의 사진구역과 프로필 구역 사이 간격을 좁힘 */
             }
             .left-panel {
                 flex: none;
                 width: 100%;
-                margin-bottom: 10px;
-                gap: 12px; /* ★ 사진과 대사창 사이 간격을 조금 더 좁힘 */
+                height: auto; /* ★ PC버전의 height: 100%를 무효화시켜 불필요한 빈 공간 제거 */
+                gap: 12px;
             }
             .photo-frame {
                 width: 65%; 
                 margin: 0 auto;
             }
-            /* ★ 모바일 대사창 높이 및 패딩 수정 */
             .dialogue-box {
-                flex-grow: 0; /* ★ 억지로 늘어나지 않도록 방지 */
-                min-height: 70px; /* ★ 최소 높이를 낮춤 */
-                padding: 15px 12px 10px 12px; /* ★ 안쪽 여백을 줄여서 날씬하게 */
+                flex-grow: 0; 
+                min-height: 70px; 
+                padding: 15px 12px 10px 12px; 
             }
             .dialogue-text {
-                font-size: 0.95rem; /* ★ 모바일에서 텍스트 크기를 살짝 줄임 */
+                font-size: 0.95rem; 
                 line-height: 1.4;
             }
             .right-panel {
@@ -544,7 +542,7 @@
                 name: "민서율",
                 ageGrade: "1학년 / 20세",
                 dept: "연극학과",
-                personality: "늘 내숭을 떨고 애교를 부린다. 다 관심을 받기 위해서다. 애정결핍. 사랑받기 위해 얌전하고 귀여운척을 한다.",
+                personality: "늘 내숭을 떨고 애교를 부린다. 다 관심을 받기 위해서다. 애정결핍. 사랑받기 위해 얌전하고 귀여운척을 전한다.",
                 features: "귀엽고 순수한 척 하지만 실은 왈가닥 하는 성격. 가족이 바빠서 사랑을 충분히 받고 자라지 못했다. 타인의 시선을 동력삼아 자신의 자존감을 증명하고, 고독함을 부정하려 한다.",
                 quote: "“흥, 다른 사람이랑 놀았으면서! 다음엔 무조건 나랑 놀아, 알겠지?”",
                 photo: "./SY_cowboyshot_tp.png" 
